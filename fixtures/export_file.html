@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>日报</title>
+  <style type="text/css">
+    body {
+      height: 100%;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-family: Chinese Quote, -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    }
+
+    /* 清除内外边距 */
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    hr,
+    p,
+    blockquote,
+    /* structural elements 结构元素 */
+    dl,
+    dt,
+    dd,
+    ul,
+    ol,
+    li,
+    /* list elements 列表元素 */
+    pre,
+    /* text formatting elements 文本格式元素 */
+    fieldset,
+    lengend,
+    button,
+    input,
+    textarea,
+    /* form elements 表单元素 */
+    th,
+    td {
+      /* table elements 表格元素 */
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 设置默认字体 */
+    body,
+    button,
+    input,
+    select,
+    textarea {
+      /* for ie */
+      /*font: 12px/1 Tahoma, Helvetica, Arial, "宋体", sans-serif;*/
+      font: 12px/1;
+      /* 用 ascii 字符表示，使得在任何编码下都无问题 */
+    }
+
+    h1 {
+      font-size: 18px;
+      /* 18px / 12px = 1.5 */
+    }
+
+    h2 {
+      font-size: 16px;
+    }
+
+    h3 {
+      font-size: 14px;
+    }
+
+    h4,
+    h5,
+    h6 {
+      font-size: 100%;
+    }
+
+    address,
+    cite,
+    dfn,
+    em,
+    var {
+      font-style: normal;
+    }
+
+    /* 将斜体扶正 */
+    code,
+    kbd,
+    pre,
+    samp,
+    tt {
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    /* 统一等宽字体 */
+    small {
+      font-size: 12px;
+    }
+
+    /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+    /* 重置列表元素 */
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    /* 重置文本格式元素 */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /*a:hover { text-decoration: underline; }*/
+
+    abbr[title],
+    acronym[title] {
+      /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */
+      border-bottom: 1px dotted;
+      cursor: help;
+    }
+
+    q:before,
+    q:after {
+      content: '';
+    }
+
+    /* 重置表单元素 */
+    legend {
+      color: #000;
+    }
+
+    /* for ie6 */
+    fieldset,
+    img {
+      border: none;
+    }
+
+    /* img 搭车：让链接里的 img 无边框 */
+    /* 注：optgroup 无法扶正 */
+    button,
+    input,
+    select,
+    textarea {
+      font-size: 100%;
+      /* 使得表单元素在 ie 下能继承字体大小 */
+    }
+
+    /* 重置表格元素 */
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    label {
+      font-weight: 700;
+    }
+
+    html {
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    #app {
+      height: 100%;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    a:focus,
+    a:active {
+      outline: none;
+    }
+
+    a,
+    a:focus,
+    a:hover {
+      cursor: pointer;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    div:focus {
+      outline: none;
+    }
+  </style>
+  <style type="text/css">
+    .mb-23 {
+      margin-bottom: 23px;
+    }
+
+    .mr-20 {
+      margin-right: 20px;
+    }
+
+    .text-danger {
+      color: #ff0000;
+    }
+
+    .width-100 {
+      width: 100px;
+    }
+
+    .width-150 {
+      width: 150px;
+    }
+
+    .width-160 {
+      width: 160px;
+    }
+
+    .width-210 {
+      width: 210px;
+    }
+
+    .report-body {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background-color: #fff;
+    }
+
+    #day-report {
+      width: 700px;
+      margin: 0 auto;
+    }
+
+    .day-report {
+      position: relative;
+      width: 700px;
+      margin: 0 auto;
+      background-color: #43a4ff;
+      font-family: '微软雅黑', sans-serif;
+    }
+
+    .dr-header {
+      width: 700px;
+      height: 244px;
+    }
+
+    .drh-img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .drh-title {
+      position: absolute;
+      left: 40px;
+      top: 73px;
+      color: #FFFFFF;
+      text-align: left;
+    }
+
+    .drh-small-title {
+      font-size: 20px;
+    }
+
+    .drh-large-title {
+      font-size: 36px;
+      line-height: 40px;
+    }
+
+    .drh-date-title {
+      display: inline-block;
+      height: 25px;
+      text-align: center;
+      line-height: 25px;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      background-color: #ffffff;
+      color: #081C5B;
+      border-radius: 15px;
+      margin-top: 15px;
+      padding: 0 10px
+    }
+
+    .dr-header-blue {
+      width: 100%;
+      height: 20px;
+      background-color: rgba(29, 123, 247, 1);
+    }
+
+    .dr-content {
+      width: 100%;
+      padding: 20px;
+    }
+
+    .drc-ex {
+      font-weight: 400;
+      font-style: normal;
+      color: #FFFFFF;
+    }
+
+    .drc-ex-title {
+      text-align: center;
+      font-size: 36px;
+      line-height: 36px;
+      margin-bottom: 25px;
+    }
+
+    .drc-ex-situation {
+      margin-bottom: 40px;
+    }
+
+    .dr-exs-list {}
+
+    .dr-exs-item {
+      display: inline-block;
+      width: 320px;
+      height: 170px;
+      border: 1px solid rgba(242, 242, 242, 1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .dr-exs-item img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .dr-exs-item .img-title {
+      font-size: 20px;
+    }
+
+    .dr-exs-item .dr-exs-item-text {
+      font-size: 16px;
+      text-align: left;
+    }
+
+    .drc-ex-type {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .drc-ex-type .drc-ext-pie {
+      width: 660px;
+      height: 420px;
+      position: relative;
+    }
+
+    .drc-ex-time {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .drc-ex-time .drc-ext-bar {
+      width: 660px;
+      height: 240px;
+      position: relative;
+    }
+
+    .drc-ex-detail {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .drc-ex-biz {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .drc-ex-inst {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .drc-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ffffff;
+    }
+
+    .drc-table,
+    .drc-table td,
+    .drc-table th {
+      border: 1px solid #ffffff;
+      font-weight: 400;
+      font-size: 13px;
+      color: #FFFFFF;
+    }
+
+    .drc-table th {
+      text-align: center;
+      background-color: #007df7;
+      padding: 2px;
+    }
+
+    .drc-table td {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .dr-footer {
+      width: 100%;
+      height: 100px;
+      padding: 15px;
+      background-color: #007df7;
+      text-align: center;
+    }
+
+    .dr-footer img {
+      width: 244px;
+      height: 50px;
+    }
+
+    .dr-footer p {
+      text-align: center;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='app'>
+    {body_content}
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>日报</title>
+  <link rel="stylesheet" href="{report_css}">
+</head>
+
+<body>
+  <div id='app'>
+    <div class="day-report">
+      <div class="dr-header">
+        <img src="{report_header_img}" alt="标题图片" class="drh-img">
+        <div class="drh-title">
+          <p class="drh-small-title">嘉为蓝鲸WeOps</p>
+          <p class="drh-large-title">应用状态管理日报</p>
+          <span class="drh-date-title">{report_header_date}</span>
+        </div>
+      </div>
+      <div class="dr-header-blue"></div>
+      <div class="dr-content">
+        <div class="drc-ex drc-ex-situation">
+          <p class="drc-ex-title"> 异常概况 </p>
+          <div class="dr-exs-list">
+            {exception_situation}
+          </div>
+        </div>
+        <div class="drc-ex drc-ex-type">
+          <p class="drc-ex-title"> 异常类型分布 </p>
+          <img id="drc-ext-pie" class="drc-ext-pie" src="{exception_type_pie}" alt="异常类型分布">
+        </div>
+        <div class="drc-ex drc-ex-time">
+          <p class="drc-ex-title"> 异常时间分布 </p>
+          <img class="drc-ext-bar mb-50" src="{exception_week_bar}" alt="异常时间分布">
+          <img class="drc-ext-bar" src="{exception_time_bar}" alt="异常时间分布">
+        </div>
+        <div class="drc-ex drc-ex-detail">
+          <p class="drc-ex-title"> 异常清单 </p>
+          <table class="drc-table">
+            {exception_detail_table}
+          </table>
+        </div>
+        <div class="drc-ex drc-ex-biz">
+          <p class="drc-ex-title"> 业务异常数top </p>
+          <table class="drc-table">
+            {exception_biz_table}
+          </table>
+        </div>
+        <div class="drc-ex drc-ex-inst">
+          <p class="drc-ex-title"> 实例异常数top </p>
+          <table class="drc-table">
+            {exception_inst_table}
+          </table>
+        </div>
+      </div>
+      <div class="dr-footer">
+        <img src="{report_footer_logo}" alt="logo">
+        <p>研运至简 无限可为</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
